@@ -1,0 +1,23 @@
+---
+title: "My Maps and Places"
+author: "Maneesh Pandey"
+date: "May 28, 2018"
+output: html_document
+---
+
+## Introduction
+This document provides information about supporting organizations of UN with their locations on map. 
+
+Hover over the home Symbol for identification of place, click to look at the Web address of organisation.
+
+```{r,echo=FALSE}
+# Dynamic map with Logo and weblink of United Nations and its organizations
+library(leaflet)
+set.seed(2018-05-30)
+UNlat_long<-data.frame(lat=c(40.7489,41.9028,51.4934,48.8503),lng=c(-73.9680,12.4964,-0.1207,2.3038))
+UN_sites<-c("http://www.un.org/en/index.html", "http://www.fao.org/home/en/", "http://www.imo.org/EN/Pages/Default.aspx", "https://en.unesco.org/")
+
+icon.ion <- makeAwesomeIcon(icon = 'home', markerColor = 'lightred')
+dyn_map<- UNlat_long%>%leaflet()%>%addTiles()%>%addAwesomeMarkers(icon=icon.ion,label=c("United Nations HQ", "FAO HQ","IMO HQ","UNESCO" ),popup=UN_sites)
+dyn_map
+```
